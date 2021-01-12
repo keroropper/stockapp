@@ -1,0 +1,48 @@
+<div class='account-page' id='account-page'>
+  <div class='account-page__inner clearfix'>
+    <div class='account-page__inner--left account-page__header'>
+      <h2>新規登録</h2>
+    </div>
+    <div class='account-page__inner--right user-form'>
+      <%= form_with model: @user, url: new_user_registration_path, local: true do |f|%>
+        <%# <%= devise_error_messages!%> %>
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :nickname, "ニックネーム(2~6文字)" %>
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :nickname, class:"input-default", id:"nickname", autofocus: true, maxlenght:"6" %>
+          </div>
+        </div>
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :email, "Eメール"%>
+          </div>
+          <div class='field-input'>
+            <%= f.email_field :email, class:"input-default", id:"email", autofocus: true %>
+          </div>
+        </div>
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :password, "パスワード"%>
+            <i>(英数字6文字以上)</i>
+          </div>
+          <div class='field-input'>
+            <%= f.password_field :password, class:"input-default", id:"password", autocomplete: "off" %>
+          </div>
+        </div>
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :password_confirmation "パスワード(確認用)"%>
+          </div>
+          <div class='field-input'>
+            <%= f.password_field :password_confirmation, class:"input-default", id:"password-confirmation", autocomplete: "off"%>
+          </div>
+        </div>
+        <div class='actions'>
+          <%= f.submit "登録", class: 'btn'%>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
