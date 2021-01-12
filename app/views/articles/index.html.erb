@@ -1,0 +1,5 @@
+<ul class="lists-user">
+  <li><%= link_to '新規登録', new_user_registration_path, class: "sign_up" %></li>
+  <li><%= link_to 'ログイン', new_user_session_path, class: "sign_in" %></li>
+  <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "log_out" %></li>
+</ul>
