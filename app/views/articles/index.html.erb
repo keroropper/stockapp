@@ -3,3 +3,7 @@
   <li><%= link_to 'ログイン', new_user_session_path, class: "sign_in" %></li>
   <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "log_out" %></li>
 </ul>
+
+<% link_to new_articre_path do 
+  <span>投稿する</span>
+<% end 
