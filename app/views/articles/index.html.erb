@@ -4,6 +4,12 @@
   <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "log_out" %></li>
 </ul>
 
-<% link_to new_articre_path do 
+<%= link_to new_article_path, method: :get, class: 'new-post-btn' do %>
   <span>投稿する</span>
-<% end 
+<% end %>
+
+<div class="article-list">
+  <% @articles.each do |article| %>
+    <%= article.title %>
+  <% end %>
+</div>

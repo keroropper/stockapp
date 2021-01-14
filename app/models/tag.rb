@@ -1,4 +1,6 @@
 class Tag < ApplicationRecord
-  has_many :articles_tag_rerations
-  has_many :articles, through: :articles_tag_rerations
+  has_many :article_tag_relations
+  has_many :articles, through: :article_tag_relations
+
+  validates :name, uniqueness: true
 end

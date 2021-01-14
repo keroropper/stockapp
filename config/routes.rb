@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  root to: 'articles#index'
   devise_for :users
-  resources :articles, only: [:new, :create]
+  root to: 'articles#index'
+  resources :articles, only: [:index, :new, :create] do
+    collection do
+      get 'search'
+    end
+  end
 end

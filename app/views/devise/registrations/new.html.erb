@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :nickname, "ニックネーム" %><br />
-    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
+    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", maxlength:"6", size: "20×30", placeholder: '2~6文字以内' %>
   </div>
 
   <div class="field">
@@ -31,4 +31,4 @@
   </div>
 <% end %>
 
-<%# <%= render "devise/shared/links" %>
+<%= render "devise/shared/links" %>
