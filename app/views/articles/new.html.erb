@@ -2,6 +2,8 @@
 
   <%= form_with model: @article, url: articles_path, local: true do |f| %>
 
+    <%= render "shared/error_messages", model: f.object %>
+
     <div calss="article-title">
       <%= f.text_field :title, id: "article-title", placeholder:"50文字以内", size:'50' %>
     </div>
