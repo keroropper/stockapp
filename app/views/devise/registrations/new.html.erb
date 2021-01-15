@@ -4,11 +4,7 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-<<<<<<< Updated upstream
-    <%= f.label :nickname, "ニックネーム" %><br />
-=======
     <%= f.label :nickname %><br />
->>>>>>> Stashed changes
     <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
   </div>
 
@@ -35,4 +31,4 @@
   </div>
 <% end %>
 
-<%# <%= render "devise/shared/links" %>
+<%= render "devise/shared/links" %>
