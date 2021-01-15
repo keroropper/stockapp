@@ -1,0 +1,27 @@
+ <div class="article-wrapper">
+
+  <%= form_with model: @article, url: articles_path, local: true do |f| %>
+
+    <%= render "shared/error_messages", model: f.object %>
+
+    <div calss="article-title">
+      <%= f.text_field :title, id: "article-title", placeholder:"50文字以内", size:'50' %>
+    </div>
+    <div calss="article-tag">
+      <%= f.text_field :name, placeholder:"株に関連するタグをスペース区切りで3つまで入力 
+      (例: 株価 インフレ)", size:'70', id: "article-tag-name"%>
+    </div>
+    <div id="search-result">
+    </div>
+    <div calss="article-text">
+      <%= f.text_area :content, placeholder:"株の知識を共有しよう", id: "article-content" %> 
+    </div>
+    <div calss="article-image">
+      <%= f.file_field :images, name: 'article[images][]', id: "article-image"%>
+    </div>
+    <div id="image-list"></div>
+    <div calss="article-post">
+      <%= f.submit "投稿する", class:"post-btn" %>
+    </div>
+ <% end %>
+</div>
