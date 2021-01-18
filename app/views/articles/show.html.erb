@@ -1,0 +1,26 @@
+<h2>
+<%= link_to 'stockapp', '/' %>
+</h2>
+
+<div class="article-details">
+  <div class="article-title">
+    <%= @article.title %>
+  </div>
+
+  <% @tags.each do |tag| %>
+    <p>＃<%= tag.name %></P>
+  <% end %>
+
+  <div calss="article-image">
+    <% @article.images.each do |image| %>
+      <%= image_tag image %>
+    <% end %>
+  </div>
+  <div id="image-list"></div>
+
+  <div class="article-content">
+    <%= @article.content %>
+  </div>
+</div>
+
+  <%= link_to "編集", edit_article_path, method: :get, class: "article-edit-btn" %>
