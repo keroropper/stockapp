@@ -1,3 +1,4 @@
+
 <ul class="lists-user">
   <li><%= link_to '新規登録', new_user_registration_path, class: "sign_up" %></li>
   <li><%= link_to 'ログイン', new_user_session_path, class: "sign_in" %></li>
@@ -8,8 +9,15 @@
   <span>投稿する</span>
 <% end %>
 
-<div class="article-list">
-  <% @articles.each do |article| %>
-    <%= article.title %>
-  <% end %>
+<div class="article-content">
+  <ul class="article-lists">
+   <% @articles.each do |article| %>
+     <li class="article-list">
+       <%= link_to article_path(article.id) do %>
+          <div class="article-title-list">
+            <%= article.title %>
+          </div>
+       <% end %>
+     </li>
+    <% end %>
 </div>
