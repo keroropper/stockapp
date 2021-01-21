@@ -1,7 +1,9 @@
 class ArticlesController < ApplicationController
 
   def index
-    @articles = Article.all.order('created_at DESC')
+    @articles = Article.includes(:tags).order('created_at DESC')
+    # @article = Article.find(params[:article_id])
+    # @tag = @article.tags
   end
 
   def new
