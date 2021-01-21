@@ -59,3 +59,7 @@ gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
 
 gem 'pry-rails'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-rails'
+gem 'rails-i18n', '~> 6.0'
