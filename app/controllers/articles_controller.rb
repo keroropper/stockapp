@@ -1,8 +1,9 @@
 class ArticlesController < ApplicationController
 
   def index
-    # @articles = Article.includes(:tags).order('created_at DESC')
-    @articles = Article.page(params[:page]).order("created_at DESC")
+    @articles = Article.includes(:tags).order('created_at DESC')
+    # @article = Article.find(params[:article_id])
+    # @tag = @article.tags
   end
 
   def new
@@ -10,6 +11,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    # binding.pry
     @article = Article.new(article_tag_params)
     if @article.save
       tag_list = tag_params[:name].split(/[[:blank:]]+/).select(&:present?)#空白で区切る
@@ -33,15 +35,13 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    @tag_list = @article.tags.pluck(:name)
+    #pluckは引数に指定したカラムを配列で取得する
   end
 
   def update
     @article = Article.find(params[:id])
-    if @article.update(article_tag_params)  
-       tag_list = tag_params[:name].split(/[[:blank:]]+/).select(&:present?)#空白で区切る  
-       @article.save_tags(tag_list)
-      redirect_to root_path
+    if @article.update(article_tag_params)    
+      redirect_to article_path(@article)
     else
       render :edit
     end
@@ -58,7 +58,7 @@ private
        images: params[:article][:images])
   end
 
-  def tag_params
-    params.require(:article).permit(:name)
-  end
+ def tag_params
+  params.require(:article).permit(:name)
+ end
 end

@@ -3,50 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 //text with ellipsis
-
-div {                   
-  a:hover {
-    text-decoration: none;
-  }
-  a {                  //aの中の  ,  ↓id=app_nameを参照
-     #app_name {        //#はidを参照する
-      color: white;
-    }
-  }
-}
-
-.new-post-link {
-    display: block;
-    padding: 15px 15px;
-    margin-right: 30px;
-    background-color: #EEEEEE;
-    border-radius: 5px;
-}
-
-  .edit-link {
-    text-align:center;
-    display: block;
-    color: orange;
-    padding: 10px 10px;
-    border: solid 2px orange;
-    border-radius: 5px;
-  }
-
-
-.search-form {
-  border-radius: 50px;
-}
-
-body.wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-}
-
-footer {
-  height: 200px;
-  background-color: #444444;
-  font-family: Arial Black;
-  margin-top: auto;
+.through-content a {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
