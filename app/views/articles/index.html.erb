@@ -1,5 +1,3 @@
-<%= render "shared/header" %>
-
 <div class="container-fluid bg-light">
   <div class="row">
 
@@ -9,38 +7,42 @@
 
     <div class="col-sm-6">
       <% @articles.each do |article| %>
-        <div class="list-group w-auto border-bottom bg-white m-0 ">
+        <div class="list-group border-bottom bg-white m-0"style="height: 155px;">
           <%= link_to article_path(article.id) do %>
 
-            <div class="list-group list-group-flush">
-
-                <div>
+            <div class="list-group list-group-flush my-auto" style="width: 640px; margin-left: 25px;">
+                <div class="text-dark">
                   <%=time_ago_in_words(article.created_at)%>前
                 </div>
 
-                <div>
-                  <h2>
+                <div class="text-dark">
+                  <h2 class="my-2">
                   <%= article.title %>
                   </h2>
                 </div>
 
-                <div class="d-flex">
-                  <% article.tags.each do |tag| %>
-                    <p>#<%= tag.name %></P>
-                  <% end %>
+                <div>
+                  <span class="glyphicon glyphicon-tags " aria-hidden="true">
+                    <% article.tags.pluck(:name).each do |i| %>
+                      <span class="badge badge-secondary">
+                        <%= i %>
+                      </span>
+                    <%end%>
+                  </span>
                 </div>
 
-                <div>
-                  <a class="through-content">
-                    <p class="mb-1"><%= article.content %></p>
+                <div class="text-wrap" >
+                  <a class="through-content" style="color: #BBBBBB;">
+                    <p class="my-3"><%= truncate(article.content, length: 60) %></p>
                   </a>
                 </div>
-
             </div>
+
 
           <% end %>
         </div>
       <% end %>
+            <%= paginate @articles %>
     </div>
 
     <div class="col-sm-3 text-center">
