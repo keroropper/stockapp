@@ -1,10 +1,6 @@
-<header>
-  <%= render "shared/header" %>
-</header>
-
 <div class="container-fluid text-center" style="background-color: #EEEEEE;">
   <div class="row">
-    <div class="col-sm-8 mx-auto bg-white text-left" >
+    <div class="col-sm-8 mx-auto bg-white text-left vh-100" >
 
         <div class="article-title" style="margin-top: 30px;">
           <p class="text-left" style="font-size: 40px;">
@@ -32,12 +28,9 @@
           <%= @article.content %>
         </div>
 
-        <div class="text-left">
-          <button type="button" class=" btn btn-outline-info" style="border: solid 2px #0000CD">
-            <%= link_to "編集", edit_article_path, method: :get, style: "color: #0000CD; font-weight: bold"  %>
-          </button>
+        <div style="width: 100px;">
+          <%= link_to "編集", edit_article_path, class:"edit-link" %>
         </div>
-
 
     </div>
   </div>
