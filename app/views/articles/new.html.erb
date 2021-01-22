@@ -1,39 +1,30 @@
-<div class="vh-100 vw-100">
-  <div class="post-article">
+ <div class="article-wrapper">
 
   <%= form_with model: @article, url: articles_path, local: true do |f| %>
+
     <%= render "shared/error_messages", model: f.object %>
 
-    <div calss="">
-      <%= f.text_field :title, id: "article-title", placeholder:"タイトルを40文字以内で入力してください", class: "vw-100 mb-1 fs-1", style: "height: 60px;",maxlength:"40" %>
+    <div calss="article-title">
+      <%= f.text_field :title, id: "article-title", placeholder:"タイトル50文字以内", size:'50' %>
     </div>
 
     <div calss="article-tag">
-      <%= f.text_field :name, placeholder:"タグが複数の場合、スペースで区切ってください",id: "article-tag-name", class: "vw-100 mb-1 ", style: "height: 50px;"%>
+      <%= f.text_field :name, placeholder:"タグを複数つけるには、' , 'で区切ってください",id: "article-tag-name"%>
     </div>
     <div id="search-result">
+    </div>
+
+    <div calss="article-text">
+      <%= f.text_area :content, placeholder:"本文", id: "article-content" %> 
     </div>
 
     <div calss="article-image">
       <%= f.file_field :images, name: 'article[images][]', id: "article-image"%>
     </div>
     
-    <div class=" ">
     <div id="image-list"></div>
-    </div>
-    <div calss="article-text">
-      <%= f.text_area :content, placeholder:"本文", id: "article-content", maxlength:"1000", class: "vw-100 fs-3 overflow-auto", style: "height: 500px;" %> 
-    </div>
-
-    <div id="string-count" style="margin-bottom: 30px; font-size: 20px;">
-      0文字
-    </div>
-
-
     <div calss="article-post">
-        <p style="margin: 0 612px;" ><%= f.submit "投稿する", class:"post-btn bg-primary border-0", style:"padding: 15px 80px;"%></p>
+      <%= f.submit "投稿する", class:"post-btn" %>
     </div>
  <% end %>
-
-  </div>
 </div>
