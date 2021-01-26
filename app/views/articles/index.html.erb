@@ -6,6 +6,7 @@
     </div>
 
     <div class="col-sm-6">
+
       <% @articles.each do |article| %>
         <div class="list-group border-bottom bg-white m-0"style="height: 155px;">
           <%= link_to article_path(article.id) do %>
@@ -23,9 +24,9 @@
 
                 <div>
                   <span class="glyphicon glyphicon-tags " aria-hidden="true">
-                    <% article.tags.pluck(:name).each do |i| %>
+                    <% article.tags.each do |i| %>
                       <span class="badge badge-secondary">
-                        <%= i %>
+                        <%= i.name %>
                       </span>
                     <%end%>
                   </span>
@@ -46,7 +47,10 @@
     </div>
 
     <div class="col-sm-3 text-center">
-      <h1>テスト</h1>
+      <% sleep 1 %>
+      <% @table.each do |t| %>
+        <%= t.inner_text %>
+      <% end %>
     </div>
 
   </div>

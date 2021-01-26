@@ -7,7 +7,7 @@
     </a>
     </div>
 
-    <form class="mx-5 bg-white rounded d-flex" action='#'>
+    <%# <form class="mx-5 bg-white rounded d-flex" action='search' url="/articles/search">
       <button type="button" class="btn btn-secondary btn-sm" disabled>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search " viewBox="0 0 16 16">
           <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -16,7 +16,13 @@
       <div style="width: 715px; border-radius: 50px;" class="search-form">
         <input style="width: 100%; height: 50px; " class="rounded border-0" type="search" placeholder="キーワードから探す">
       </div>
-    </form>
+    </form> %>
+
+    <%= form_with(url: search_articles_path, local: true, method: :get, class: "search_form") do |form| %>
+      <%= form.text_field :keyword, placeholder: "投稿を検索する", class: "search-input" %>
+      <%= form.submit "検索", class: "search-btn" %>
+    <% end %>
+
 
     <div class="text-center">
       <%= link_to "投稿する", new_article_path, class:"new-post-link" %>
