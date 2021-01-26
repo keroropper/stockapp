@@ -39,5 +39,29 @@ class Article < ApplicationRecord
         end
     end
 
+    # def self.search
+    #   sort = params[:sort] || "created_at DESC"
+    #   @keyword = params[:keyword]
+
+    #   if @keyword.present?
+    #     @articles = []
+    #     #分割したキーワードごとに検索
+    #     @keyword.split(/[[:blank:]]+/).each do |keyword|  #splitメソッドにより、入力された値を引数を区切り文字として、配列として返します。＋により連続した空白にも対応
+    #       next if keyword == ""
+    #       @articles += Article.where('title LIKE(?) OR content LIKE(?)', "%#{keyword}%", "%#{keyword}%")
+    #     end
+    #       @articles.uniq!
+    #   else
+    #     @articles.order(sort)
+    #   end
+    # end
+
+    def self.search(search)
+      if search != ""
+        Article.where('content LIKE(?)', "%#{search}%")
+      else
+        Article.all 
+      end
+    end
 
 end

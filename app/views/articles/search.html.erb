@@ -1,0 +1,8 @@
+
+    <div class="contents row">
+      <% @articles.each do |article| %>
+        <%= render partial: "shared/articles", locals: { article: article } %>
+      <% end %> 
+    </div>
+    <%= paginate @articles %>
+   
