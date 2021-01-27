@@ -4,12 +4,8 @@ class ArticlesController < ApplicationController
   # before_action :tag_result, only: [:search]
 
   def index
-    # binding.pry
-    # @articles = Article.includes(:tags).order('created_at DESC')
     @articles = Article.page(params[:page]).order("created_at DESC")
-    # @tag_list = Tag.all
-    # @tag = Tag.find(params[:tag_id])
-    # @tag_articles = @tag.articles.all
+    @news = ArticlesHelper
   end
 
   def new
@@ -28,7 +24,6 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    # @pages = Article.page(params[:page]).order("created_at DESC")
     @articles = Article.search(params[:keyword]).page(params[:page]).order("created_at DESC")
 
     end
