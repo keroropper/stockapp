@@ -4,11 +4,16 @@ class Article < ApplicationRecord
   has_many_attached :images
   has_many :comments
   belongs_to :user
+  has_many :likes
 
 
   with_options presence: true do
     validates :title, length: { maximum: 40 }
     validates :content, length: { maximum: 1000 }
+  end
+
+  def like_user(user_id)
+    likes.find_by(user_id: user_id)
   end
 
   # def save_tags(tag_list) #コントローラーから呼び出し
@@ -67,3 +72,5 @@ class Article < ApplicationRecord
     end
 
 end
+
+
