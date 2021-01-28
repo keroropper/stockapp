@@ -24,9 +24,18 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    @articles = Article.search(params[:keyword]).page(params[:page]).order("created_at DESC")
+    # @articles_resoult = Article.page(params[:page]).order("created_at DESC")
+    redirect_to root_path if params[:keyword] == ""
 
-    end
+    split_keyword = params[:keyword].split(/[[:blank:]]+/)
+  
+    @articles = [] 
+    split_keyword.each do |keyword|
+      next if keyword == "" 
+      @articles += Article.joins(:tags).where('title LIKE(?) OR content LIKE(?) OR tags.name LIKE(?)', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    end 
+    @articles.uniq! #重複した投稿を削除する
+  end
 
   def show
     @article = Article.find(params[:id])
@@ -50,10 +59,6 @@ class ArticlesController < ApplicationController
       render :edit
     end
   end
-
-
-
-
 
 private
   

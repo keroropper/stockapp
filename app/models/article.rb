@@ -16,19 +16,6 @@ class Article < ApplicationRecord
     likes.find_by(user_id: user_id)
   end
 
-  # def save_tags(tag_list) #コントローラーから呼び出し
-  #   tag_list.each do |tag|
-  #     unless find_tag = Tag.find_by(name: tag.downcase) #DBを検索しても値がなく、find_tagに値が代入されない時に処理実行
-  #       begin
-  #         self.tags.create!(name: tag)#保存が成功しても失敗しても、オブジェクト＃を返してしまうため、！をつける事位よって例外処理を発生させている
-  #       rescue 
-  #         nil #上記の例外処理によって、nilが呼び出される。そうすると、値は保存されずに次の処理に進む
-  #       end
-  #     else
-  #       ArticleTagRelation.create!(article_id: self.id, tag_id: find_tag.id)
-  #     end
-  #   end
-
     def save_tags(tag_list)
       current_tags = self.tags.pluck(:name) unless self.tags.nil?
       old_tags = current_tags - tag_list
@@ -63,13 +50,20 @@ class Article < ApplicationRecord
     #   end
     # end
 
-    def self.search(search)
-      if search != ""
-        Article.where('content LIKE(?)', "%#{search}%")
-      else
-        Article.all 
-      end
-    end
+    # def self.search(search)
+    #   if search != ""
+    #     split_keywords = search.split(/[[:blank:]]+/)
+        
+    #     @search_articles = []
+    #     split_keywords.each do |keyword|
+    #     next if keyword == "" #空白を検索しないようにする対策。こうしないと " "というように空白が検索され、つまり全部検索されてしまう
+    #     @search_articles += Article.joins(:tags).where('content LIKE(?) OR title LIKE(?)' , "%#{search}%", "%#{search}%")
+    #     end
+    #     @search_articles.uniq!
+    #   else
+    #     Article.all
+    #   end
+    # end
 
 end
 
