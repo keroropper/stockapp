@@ -39,6 +39,8 @@
           <% end %>
         </div>
 
+        <%= render partial: "likes/like", locals: { article: @article } %>
+
         <div class="comments">
           <h4>＜コメント一覧＞</h4>
           <% @comments.each do |comment| %>
@@ -48,7 +50,7 @@
             </p>
           <% end %>
         </div>
-
+        
     </div>
   </div>
 </div>
