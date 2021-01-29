@@ -8,13 +8,4 @@ Rails.application.routes.draw do
     resources :comments, only: :create
     resources :likes, only: [:create, :destroy]
   end
-<<<<<<< Updated upstream
-
-  # post 'like/:id' => 'likes#create', as: 'create_like'
-  # delete 'like/:id' => 'likes#destroy', as: 'destroy_like'
-
-=======
-  
-  get 'tags/index' => 'articles#tag_index'
->>>>>>> Stashed changes
 end

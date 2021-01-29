@@ -35,11 +35,6 @@ class ArticlesController < ApplicationController
   end
 
   def search
-<<<<<<< Updated upstream
-    @articles = Article.search(params[:keyword]).page(params[:page]).order("created_at DESC")
-
-    end
-=======
     redirect_to root_path if params[:keyword] == ""
     split_keyword = params[:keyword].split(/[[:blank:]]+/)
     @articles = [] 
@@ -51,7 +46,6 @@ class ArticlesController < ApplicationController
     @articles.uniq! #重複した投稿を削除する
     @search_resoult = Article.page(params[:page]).order("created_at DESC")
   end
->>>>>>> Stashed changes
 
   def show
     @article = Article.find(params[:id])
@@ -75,15 +69,6 @@ class ArticlesController < ApplicationController
       render :edit
     end
   end
-
-<<<<<<< Updated upstream
-
-
-
-=======
-  def tag_article
-  end
->>>>>>> Stashed changes
 
 private
   
