@@ -39,9 +39,8 @@
           <% end %>
         </div>
 
-        <%#= render partial: "likes/like", locals: { article: @article } %>
-        <div id="favorites_buttons_<%= @article.id %>">
-          <%= render 'likes/like', article: @article %>
+        <div class="likes_buttons">
+          <%= render partial: "likes/like", locals: { article: @article } %>
         </div>
 
         <div class="comments">

@@ -1,10 +1,21 @@
 class ArticlesController < ApplicationController
 
-  before_action :nikkei_info, only: [:index]
+  before_action :nikkei_info, only: [:index, :tag_index, :search]
   # before_action :tag_result, only: [:search]
 
   def index
     @articles = Article.page(params[:page]).order("created_at DESC")
+    @news = ArticlesHelper
+  end
+
+  def tag_index
+    if params[:tag_id].present?
+      @tag = Tag.find(params[:tag_id])
+      @articles = @tag.articles.order("created_at DESC").page(params[:page]).order("created_at DESC")
+    else
+      @articles = Article.all.order("created_at DESC").page(params[:page]).order("created_at DESC")
+    end
+    @tag_list = Tag.all
     @news = ArticlesHelper
   end
 
@@ -24,17 +35,16 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    # @articles_resoult = Article.page(params[:page]).order("created_at DESC")
     redirect_to root_path if params[:keyword] == ""
-
     split_keyword = params[:keyword].split(/[[:blank:]]+/)
-  
     @articles = [] 
     split_keyword.each do |keyword|
       next if keyword == "" 
-      @articles += Article.joins(:tags).where('title LIKE(?) OR content LIKE(?) OR tags.name LIKE(?)', "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+      @articles += Article.joins(:tags).where('title LIKE(?) OR content LIKE(?) OR tags.name LIKE(?)', 
+      "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
     end 
     @articles.uniq! #重複した投稿を削除する
+    @search_resoult = Article.page(params[:page]).order("created_at DESC")
   end
 
   def show
