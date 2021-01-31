@@ -35,16 +35,31 @@ class ArticlesController < ApplicationController
   end
 
   def search
-    redirect_to root_path if params[:keyword] == ""
-    split_keyword = params[:keyword].split(/[[:blank:]]+/)
-    @articles = [] 
-    split_keyword.each do |keyword|
-      next if keyword == "" 
-      @articles += Article.joins(:tags).where('title LIKE(?) OR content LIKE(?) OR tags.name LIKE(?)', 
-      "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
-    end 
-    @articles.uniq! #重複した投稿を削除する
-    @search_resoult = Article.page(params[:page]).order("created_at DESC")
+    # redirect_to root_path if params[:keyword] == ""
+    # split_keyword = params[:keyword].split(/[[:blank:]]+/)
+    # @articles = [] 
+    # split_keyword.each do |keyword|
+    #   next if keyword == "" 
+    #   @articles += Article.joins(:tags).where('title LIKE(?) OR content LIKE(?) OR tags.name LIKE(?)', 
+    #   "%#{keyword}%", "%#{keyword}%", "%#{keyword}%")
+    # end 
+    # @articles.uniq! #重複した投稿を削除する
+    # @search_resoult = Article.page(params[:page]).order("created_at DESC")
+
+    @articles = Article.joins(:tags)
+    keywords = params[:keyword].split(/[[:blank:]]+/)
+    # キーワードの数だけ Article.where(...) の部分を作ってます
+    keywords = keywords.map do |keyword|
+      @articles.where("title LIKE(:keyword) OR content LIKE(:keyword) OR tags.name LIKE(:keyword)", keyword: keyword)
+    end
+
+    # キーワードの最初のひとつは or ではなく、merge を用います
+    @articles = @articles.merge(keywords[0])
+    # 残りのキーワードを or で追加していきます
+    keywords[1, keywords.length].each do |keyword|
+      @articles = @articles.or(keyword)
+    end
+    @articles = @articles.page(params[:page]).order("created_at DESC")
   end
 
   def show
