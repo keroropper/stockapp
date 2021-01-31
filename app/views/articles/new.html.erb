@@ -21,8 +21,14 @@
     <div class=" ">
     <div id="image-list"></div>
     </div>
+
     <div calss="article-text">
-      <%= f.text_area :content, placeholder:"本文", id: "article-content", maxlength:"1000", class: "vw-100 fs-3 overflow-auto", style: "height: 500px;" %> 
+      <div id="editor">
+        <%= f.text_area :content, placeholder:"本文", id: "article_content",
+         maxlength:"1000", class: "vw-100 fs-3 overflow-auto", style: "height: 500px;",
+         "v-model" => "input", name: "stockapp[content]" %> 
+         <div v-html='input | marked'></div>
+      </div>
     </div>
 
     <div id="string-count" style="margin-bottom: 30px; font-size: 20px;">
@@ -37,3 +43,17 @@
 
   </div>
 </div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    new Vue({
+      el: '#editor',
+      data: {
+        input: '<%== j @article.content %>',
+      },
+      filters: {
+        marked: marked,
+      },
+    });
+  };
+</script>
