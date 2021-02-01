@@ -66,3 +66,6 @@ gem 'jquery-rails'
 gem 'rails-i18n', '~> 6.0'
 gem 'kaminari'
 gem 'mechanize'
+gem 'redcarpet'
+gem 'coderay'
+
