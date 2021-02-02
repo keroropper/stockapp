@@ -1,11 +1,18 @@
 class ArticlesController < ApplicationController
 
+require 'open-uri'
+
   before_action :nikkei_info, only: [:index, :tag_index, :search]
   # before_action :tag_result, only: [:search]
 
   def index
     @articles = Article.page(params[:page]).order("created_at DESC")
     @news = ArticlesHelper
+    api = Rails.application.credentials.news_api[:api_key]
+    uri = "https://newsapi.org/v2/everything?q=%E6%A0%AA%E4%BE%A1&sortBy=popularity&apiKey=#{api}"
+    req = open(uri)
+    article_serialized = open(uri).read
+    @article_news = JSON.parse(article_serialized) 
   end
 
   def tag_index

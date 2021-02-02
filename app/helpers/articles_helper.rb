@@ -1,7 +1,7 @@
 module ArticlesHelper
 
   # class Stock
-  def stock_news
+  def stock_value
     agent = Mechanize.new
     page = agent.get('https://kabutan.jp/news/marketnews/')
     text_link = page.search("//table[@class='s_news_list mgbt0']//tr/td/a")[1..-1]
